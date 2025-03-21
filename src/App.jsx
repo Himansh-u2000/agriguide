@@ -4,6 +4,7 @@ import Home from './components/home/Home'
 import AboutUs from "./pages/aboutUs/AboutUs";
 import CropAdvisor from "./pages/cropAdvisor/CropAdvisor";
 import AgriBot from "./pages/agribot/AgriBot";
+import PageNotFound from "./pages/PageNotFound";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -11,12 +12,12 @@ function App() {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="advisor" element={<CropAdvisor />} />
-          <Route path="agribot" element={<AgriBot/>} />
+          <Route path="agribot" element={<AgriBot />} />
           <Route path="about" element={<AboutUs />} />
 
         </Route>
 
-        <Route path="*" element={<> Page Not Found</>} />
+        <Route path="*" element={<PageNotFound />} />
       </>
     )
   );
