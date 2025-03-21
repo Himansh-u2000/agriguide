@@ -3,6 +3,7 @@ import RootLayout from './layout/RootLayout'
 import Home from './components/home/Home'
 import AboutUs from "./pages/aboutUs/AboutUs";
 import CropAdvisor from "./pages/cropAdvisor/CropAdvisor";
+import AgriBot from "./pages/agribot/AgriBot";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -10,7 +11,7 @@ function App() {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Home />} />
           <Route path="advisor" element={<CropAdvisor />} />
-          <Route path="agribot" element={<CropAdvisor />} />
+          <Route path="agribot" element={<AgriBot/>} />
           <Route path="about" element={<AboutUs />} />
 
         </Route>

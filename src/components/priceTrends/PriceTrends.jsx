@@ -35,7 +35,7 @@ export default function PriceTrends() {
     <div>
       <SubHeader label="Price Trends" />
       <div className=" hidden md:block">
-        <div className="grid mx-auto max-w-7xl grid-cols-4 text-center font-semibold p-4">
+        <div className="mx-auto max-w-7xl justify-evenly gap-4 flex text-center font-semibold p-4">
           <span>IMAGE</span>
           <span>NAME</span>
           <span>LAST WEEK</span>

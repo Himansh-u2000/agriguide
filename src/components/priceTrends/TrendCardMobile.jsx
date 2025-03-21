@@ -16,16 +16,18 @@ export default function TrendCardMobile({
       </div>
       <div className="flex flex-col gap-4 justify-center">
         <div className='text-sm'>Last Week:{' '}
-          <span className={lastPrice > currentPrice ? 'text-red-500 text-base' : 'text-green-500 text-base'}>
+          <span >
             ₹
             {lastPrice}
             /Kg
           </span>
         </div>
-        <div className='text-sm'>Last Week: ₹
-          <span>
+        <div className='text-sm'>Today:{' '}
+          <span className={lastPrice > currentPrice ? 'text-red-500 text-base' : 'text-green-500 text-base'}>
+            ₹
             {currentPrice}
-          </span> /Kg
+            /Kg
+          </span>
         </div>
       </div>
     </div>

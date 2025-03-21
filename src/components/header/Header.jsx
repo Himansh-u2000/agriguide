@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       <header className="bg-primary">
-        <div className="mx-auto px-4 py-4 flex items-center justify-between">
+        <div className="mx-auto px-4 flex items-center justify-between">
 
           <div className="flex items-center w-20 h-20">
             <NavLink to={`/`}>
@@ -33,7 +33,7 @@ export default function Header() {
                 to={item.to}
                 onClick={() => setDrawerOpen(false)}
                 className={({ isActive }) =>
-                  `hover:font-semibold text-white ${isActive ? 'font-semibold' : ''}`
+                  `text-white ${isActive ? 'underline ' : ''}`
                 }
               >
                 <span className='flex gap-4'>
