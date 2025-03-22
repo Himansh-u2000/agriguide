@@ -14,7 +14,6 @@ function App() {
           <Route path="advisor" element={<CropAdvisor />} />
           <Route path="agribot" element={<AgriBot />} />
           <Route path="about" element={<AboutUs />} />
-
         </Route>
 
         <Route path="*" element={<PageNotFound />} />

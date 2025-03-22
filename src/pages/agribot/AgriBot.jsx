@@ -33,7 +33,6 @@ const Agribot = () => {
         },
         { params: { key: API_KEY } }
       );
-
       const botReply = response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
         "I couldn't understand. Please ask something else.";
       setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);

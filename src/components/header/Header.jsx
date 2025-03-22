@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import { RxHamburgerMenu } from 'react-icons/rx';
 import { NavLink } from 'react-router-dom';
 import logo from '../../assets/AgriGuideLgoBW.png';
 import { ROUTE } from '../../routes/route';
-import SideDrawer from './SideDrawer';
-import { RxHamburgerMenu } from 'react-icons/rx';
 
 
 export default function Header() {
