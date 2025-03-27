@@ -10,6 +10,8 @@ const Agribot = () => {
   const [isLoading, setIsLoading] = useState(false);
   const chatBoxRef = useRef(null);
 
+  const key = import.meta.env.VITE_APP_GEMINI_API;
+
   const handleSend = async () => {
     if (!input.trim()) return;
 
@@ -25,23 +27,36 @@ const Agribot = () => {
             {
               parts: [
                 {
-                  text: input,
+                  text: `You are an AI assistant who only answers questions related to farming, crops, vegetables, soil nutrients, and agricultural practices. 
+                If a question is not related to these topics, politely decline to answer. Also, do not mention your model name.  
+                First, greet the user and ask them to enter their question in any language.  
+
+                User Question: ${input}`,
                 },
               ],
             },
           ],
         },
-        { params: { key: API_KEY } }
+        { params: { key } }
       );
-      const botReply = response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "I couldn't understand. Please ask something else.";
+
+      const botReply =
+        response.data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "I couldn't understand. Please ask something about farming, crops, or soil nutrients.";
+
       setMessages((prev) => [...prev, { sender: "bot", text: botReply }]);
     } catch (error) {
       console.error("Error:", error);
       if (error.response && error.response.status === 429) {
-        setMessages((prev) => [...prev, { sender: "bot", text: "Too many requests! Please wait a moment before asking again." }]);
+        setMessages((prev) => [
+          ...prev,
+          { sender: "bot", text: "Too many requests! Please wait a moment before asking again." },
+        ]);
       } else {
-        setMessages((prev) => [...prev, { sender: "bot", text: "Error fetching response. Try again later." }]);
+        setMessages((prev) => [
+          ...prev,
+          { sender: "bot", text: "Error fetching response. Try again later." },
+        ]);
       }
     } finally {
       setIsLoading(false);
@@ -100,7 +115,7 @@ const Agribot = () => {
           className="flex-1 border p-2 rounded-l-md bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
           placeholder="Ask about crops, soil, or weather..."
           value={input}
-          onChange={(e) => setInput(e.target.value.trim())}
+          onChange={(e) => setInput(e.target.value)}
         />
         <button className="bg-green-600 text-white px-4 py-2 rounded-r-md hover:cursor-pointer" type="submit" disabled={isLoading}>
           {isLoading ? "Loading..." : "Send"}
