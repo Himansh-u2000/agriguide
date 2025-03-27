@@ -27,9 +27,8 @@ const Agribot = () => {
             {
               parts: [
                 {
-                  text: `You are an AI assistant who only answers questions related to farming, crops, vegetables, soil nutrients, and agricultural practices. 
-                If a question is not related to these topics, politely decline to answer. Also, do not mention your model name.  
-                First, greet the user and ask them to enter their question in any language.  
+                  text: `You are an AI assistant do not mention your model name.  
+                First, greet the user and ask them to enter their question in any language. and suggest random crops like wheat, rice, maize, sugarcane, etc. 
 
                 User Question: ${input}`,
                 },

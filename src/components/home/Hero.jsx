@@ -1,39 +1,41 @@
+import { useEffect, useState } from "react";
 import Dropdown from "../common/Dropdown";
 import PrimaryButton from "../common/PrimaryButton";
 import CropLineChart from "./CropLineChart ";
+import data from "../../data/state-districtData.json";
+import priceData from "../../services/priceData";
 
-export default function Hero() {
-  const states = [
-    { label: "Andhra Pradesh", value: "AP" },
-    { label: "Telangana", value: "TS" },
-    { label: "Karnataka", value: "KA" },
-    { label: "Tamil Nadu", value: "TN" },
-    { label: "Kerala", value: "KL" },
-  ]
+export default function Hero({setPriceData}) {
+  const [states, setStates] = useState([]);
+  const [District, setDistrict] = useState([]);
+  const [price, setPrice] = useState([]);
 
-  const District = [
-    { label: "Anantapur", value: "AP01" },
-    { label: "Chittoor", value: "AP02" },
-    { label: "East Godavari", value: "AP03" },
-    { label: "Guntur", value: "AP04" },
-    { label: "Krishna", value: "AP05" },
-    { label: "Kurnool", value: "AP06" },
-    { label: "Nellore", value: "AP07" },
-    { label: "Prakasam", value: "AP08" },
-    { label: "Srikakulam", value: "AP09" },
-    { label: "Visakhapatnam", value: "AP10" },
-    { label: "Vizianagaram", value: "AP11" },
-    { label: "West Godavari", value: "AP12" },
-    { label: "YSR Kadapa", value: "AP13" }
-  ]
+  const pricedata = priceData();
 
-  const handleSelection = (value) => {
-    console.log("Selected", value)
-  }
+  useEffect(() => {
+    const stateListSet = new Set();
+    const districtListSet = new Set();
+
+    data.forEach((item) => {
+      stateListSet.add({ label: item.state, value: item.state });
+      districtListSet.add({ label: item.district, value: item.district });
+    });
+
+    setStates(Array.from(stateListSet));
+    setDistrict(Array.from(districtListSet));
+    handleSelection();
+  }, []);
+
+  const handleSelection = async (value = "Narmada") => {
+    const data = await pricedata.getPriceData(value);
+    setPrice(data)
+    setPriceData(data)
+  };
+
   return (
     <div className="flex justify-evenly flex-col-reverse md:flex-row gap-4 p-4">
       <div className="flex flex-col p-4 gap-2">
-        <Dropdown data={states} label="States" onChange={handleSelection} />
+        <Dropdown data={states} label="State" onChange={handleSelection} />
         <Dropdown data={District} label="District" onChange={handleSelection} />
         <PrimaryButton className="translate-x-2 md:w-md font-semibold">
           Submit
@@ -43,5 +45,5 @@ export default function Hero() {
         <CropLineChart />
       </div>
     </div>
-  )
+  );
 }
